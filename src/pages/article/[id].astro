@@ -1,0 +1,160 @@
+---
+import { articles } from '../data/articles';
+import type { ContentBlock } from '../data/articles';
+
+export function getStaticPaths() {
+    return articles.map((a) => ({ params: { id: String(a.id) } }));
+}
+
+const { id } = Astro.params;
+const article = articles.find((a) => a.id === Number(id));
+
+const now = new Date();
+const formattedDate = now.toLocaleDateString('fr-FR', {
+	weekday: 'long',
+	day: 'numeric',
+	month: 'long'
+});
+const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+---
+
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Annapurna+SIL:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/pages/styles/global.css" />
+    <title>{article?.title ?? 'Article'} — La Page</title>
+</head>
+<body>
+
+    {article ? (
+        <>
+            <header>
+                <a href="/" style="text-decoration:none;">
+                    <h1 class="logo">LA P<span>A</span>GE</h1>
+                </a>
+                <p class="date">{dateLabel}</p>
+                <div class="yellow-bar"></div>
+                <!-- Fil d'arianne -->
+                <nav class="arianne">
+                    <a href="/">Accueil</a>
+                    <span class="arrianne-sep">/</span>
+                    <a href="/galerie">Tous les articles</a>
+                    <span class="arrianne-sep">/</span>
+                    <span class="arrianne-current">{article.title}</span>
+                </nav>
+            </header>
+
+            <div class="article-page">
+
+                <div class="article-hero">
+                    <div class="article-hero-text">
+                        <h2 class="article-main-title">{article.title}</h2>
+                        <div class="featured-meta">
+                            <span class="tag-badge">{article.category}</span>
+                            <span class="featured-date">{article.date}</span>
+                        </div>
+                        <p class="article-excerpt">{article.excerpt}</p>
+                    </div>
+                    <div class="article-hero-img">
+                        {article.image
+                            ? <img src={article.image} alt={article.alt} />
+                            : <div class="img-placeholder" style="width:100%; height:100%;" />
+                        }
+                    </div>
+                </div>
+
+                <div class="article-body">
+                    {article.content.map((block: ContentBlock) => {
+
+                        if (block.type === 'paragraph') {
+                            return <p class="article-paragraph">{block.content}</p>;
+                        }
+
+                        if (block.type === 'quote') {
+                            return (
+                                <blockquote class="article-quote">
+                                    <span class="quote-mark open">"</span>
+                                    {block.content}
+                                    <span class="quote-mark close">"</span>
+                                </blockquote>
+                            );
+                        }
+
+                        if (block.type === 'image') {
+                            return (
+                                <figure class="article-figure">
+                                    {block.src
+                                        ? <img src={block.src} alt={block.caption ?? ''} />
+                                        : <div class="img-placeholder article-single-img" />
+                                    }
+                                    {block.caption && <figcaption>{block.caption}</figcaption>}
+                                </figure>
+                            );
+                        }
+
+                        if (block.type === 'gallery') {
+                            return (
+                                <div class="article-gallery">
+                                    {block.images.map((img) => (
+                                        <figure class="gallery-figure">
+                                            {img.src
+                                                ? <img src={img.src} alt={img.caption ?? ''} />
+                                                : <div class="img-placeholder gallery-img" />
+                                            }
+                                            {img.caption && <figcaption>{img.caption}</figcaption>}
+                                        </figure>
+                                    ))}
+                                </div>
+                            );
+                        }
+
+                        if (block.type === 'image-text') {
+                            return (
+                                <div class={`article-image-text ${block.imageLeft ? 'image-left' : 'image-right'}`}>
+                                    <figure>
+                                        {block.src
+                                            ? <img src={block.src} alt={block.caption ?? ''} />
+                                            : <div class="img-placeholder it-img" />
+                                        }
+                                        {block.caption && <figcaption>{block.caption}</figcaption>}
+                                    </figure>
+                                    <p>{block.text}</p>
+                                </div>
+                            );
+                        }
+                    })}
+                </div>
+
+                <div class="article-author">
+                    Par <strong>{article.author}</strong>
+                </div>
+
+            </div>
+
+            <footer>
+                <p class="footer-logo">LA P<span>A</span>GE</p>
+                <p class="footer-desc">
+                    Worem ipsum dolor sit amet, consectetur elit.<br />
+                    Nunc vulputate libero et velit interdum.
+                </p>
+                <div class="footer-links">
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">Gestion des cookies</a>
+                    <a href="#">RGPD</a>
+                </div>
+            </footer>
+        </>
+    ) : (
+        <div style="padding: 40px; text-align: center;">
+            <h1>Article introuvable</h1>
+            <a href="/">Retour à l'accueil</a>
+        </div>
+    )}
+
+</body>
+</html>

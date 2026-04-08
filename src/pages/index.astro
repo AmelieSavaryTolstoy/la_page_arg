@@ -1,17 +1,183 @@
 ---
+import "./styles/global.css";
+import { sortedArticles, categories } from "./data/articles";
 
+const featuredArticle = sortedArticles.find((a) => a.featured);
+const weeklyArticles = sortedArticles.filter((a) => a.weekly);
+const topArticles = sortedArticles.filter((a) => a.top_articles);
+
+const now = new Date();
+const formattedDate = now.toLocaleDateString('fr-FR', {
+	weekday: 'long',
+	day: 'numeric',
+	month: 'long'
+});
+const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Annapurna+SIL:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>La Page</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<!-- Header -->
+		<header>
+			<h1 class="logo">LA P<span>A</span>GE</h1>
+			<p class="date">{dateLabel}</p>
+			<div class="yellow-bar"></div>
+			<nav class="arianne">
+                <a href="/">Accueil</a>
+            </nav>
+		</header>
+
+		<!-- Top 2 mini articles -->
+		<div class="top-articles-container">
+			{
+				topArticles.map((article) => (
+					<div class="mini-article">
+						<div class="article-hero-img">
+                        {article.image
+                            ? <img src={article.image} alt={article.alt} />
+                            : <div class="img-placeholder" style="width:100%; height:100%;" />
+                        }
+                    </div>
+						<div>
+							<h3>{article.title}</h3>
+							<p>{article.excerpt}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Featured article (always shown, not affected by filter) -->
+		{
+			featuredArticle && (
+				<div class="featured" data-category={featuredArticle.category}>
+					<div class="article-hero-img">
+                        {featuredArticle.image
+                            ? <img src={featuredArticle.image} alt={featuredArticle.alt} />
+                            : <div class="img-placeholder" style="width:100%; height:100%;" />
+                        }
+                    </div>
+					<div class="featured-content">
+						<h2 class="featured-title">{featuredArticle.title}</h2>
+						<div class="featured-meta">
+							<span class="tag-badge">
+								{featuredArticle.category}
+							</span>
+							<span class="featured-date">
+								{featuredArticle.date}
+							</span>
+						</div>
+						<p class="featured-excerpt">
+							{featuredArticle.excerpt}
+						</p>
+						<a href={`/article/${featuredArticle.id}`} class="btn-read-more">Tout lire →</a>
+					</div>
+				</div>
+			)
+		}
+
+		<!-- Weekly articles -->
+		<div class="weekly-section">
+			<h2 class="weekly-title">Articles de la semaine</h2>
+			<div class="weekly-grid" id="weekly-grid">
+				{
+					weeklyArticles.map((article) => (
+						<div
+							class="article-card"
+							data-category={article.category}
+						>
+							<div class="article-hero-img">
+								{article.image
+									? <img src={article.image} alt={article.alt} />
+									: <div class="img-placeholder" style="width:100%; height:100%;" />
+								}
+							</div>
+							<h3 class="card-title">{article.title}</h3>
+							<p class="card-excerpt">{article.excerpt}</p>
+							<div style="display:flex; justify-content:flex-end;">
+								<a href={`/article/${article.id}`} class="btn-discover">En découvrir plus →</a>
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<p class="no-results" id="no-results" style="display:none;">
+				Aucun article dans cette catégorie.
+			</p>
+
+			<div class="all-articles-wrap">
+				<a href="/galerie" class="btn-all-articles">
+					Découvrir tous nos articles ↗
+				</a>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer>
+			<p class="footer-logo">LA P<span>A</span>GE</p>
+			<p class="footer-desc">
+				Worem ipsum dolor sit amet, consectetur elit.<br />
+				Nunc vulputate libero et velit interdum.
+			</p>
+			<div class="footer-links">
+				<a href="#">Politique de confidentialité</a>
+				<a href="#">Gestion des cookies</a>
+				<a href="#">RGPD</a>
+			</div>
+		</footer>
+
+		<script>
+			const tags = document.querySelectorAll<HTMLButtonElement>(".tag");
+			const cards =
+				document.querySelectorAll<HTMLElement>(".article-card");
+			const featured = document.querySelector<HTMLElement>(".featured");
+			const noResults = document.getElementById("no-results");
+
+			tags.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					tags.forEach((b) => b.classList.remove("active"));
+					btn.classList.add("active");
+
+					const selected = btn.dataset.category;
+
+					if (featured) {
+						const featuredMatch =
+							selected === "Tous" ||
+							featured.dataset.category === selected;
+						featured.style.display = featuredMatch
+							? "grid"
+							: "none";
+					}
+
+					let visibleCount = 0;
+					cards.forEach((card) => {
+						const show =
+							selected === "Tous" ||
+							card.dataset.category === selected;
+						card.style.display = show ? "flex" : "none";
+						if (show) visibleCount++;
+					});
+
+					if (noResults) {
+						noResults.style.display =
+							visibleCount === 0 ? "block" : "none";
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

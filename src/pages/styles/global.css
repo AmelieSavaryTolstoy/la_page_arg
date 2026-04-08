@@ -1,0 +1,576 @@
+:root {
+    --black: #181A1E;
+    --white: #F5F6F8;
+    --accent: #FAC712;
+    --gray: #CCCCCC;
+    --text-muted: #444;
+    --max-w: 900px;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: "Annapurna SIL", serif;
+    line-height: 32px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── HEADER ── */
+header {
+    text-align: center;
+    padding: 18px 0 6px;
+    background: var(--white);
+}
+
+.logo {
+    font-family: "Aoboshi One", serif;
+    font-size: 48px;
+    letter-spacing: 3px;
+    color: var(--black);
+    line-height: 1;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.date {
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    color: var(--black);
+    text-align: left;
+    padding: 8px 40px 10px;
+}
+
+.yellow-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--accent);
+}
+
+/* ── ARIANE ── */
+.arianne {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 40px;
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    color: var(--black);
+}
+
+.arianne a {
+    color: var(--black);
+    text-decoration: underline;
+}
+
+.arianne a:hover {
+    background-color: var(--accent);
+}
+
+.arianne-sep {
+    color: var(--black);
+    opacity: 0.4;
+}
+
+.arianne-current {
+    color: var(--black);
+    opacity: 0.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    text-decoration: underline;
+}
+
+/* ── TOP ARTICLES ── */
+.top-articles-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 32px 40px 24px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+}
+
+.mini-article {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.img-placeholder {
+    width: 140px;
+    min-width: 140px;
+    height: 95px;
+    background: var(--gray);
+    flex-shrink: 0;
+}
+
+.mini-article h3 {
+    font-family: "Aoboshi One", serif;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: var(--black);
+}
+
+.mini-article p {
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--black);
+}
+
+/* ── TAGS ── */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px 0 28px;
+}
+
+.tag {
+    border: 1.5px solid var(--black);
+    padding: 6px 20px;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    color: var(--black);
+    transition: background 0.15s, color 0.15s;
+}
+
+.tag.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 700;
+}
+
+.tag:hover:not(.active) {
+    background: #f0f0f0;
+}
+
+/* ── FEATURED ARTICLE ── */
+.featured {
+    max-width: var(--max-w);
+    margin: 0 auto 48px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.featured-title {
+    font-family: "Aoboshi One", serif;
+    font-size: 28px;
+    color: var(--black);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.tag-badge {
+    border: 1.5px solid var(--black);
+    padding: 3px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-family: "Annapurna SIL", serif;
+    color: var(--black);
+}
+
+.featured-date {
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    color: var(--black);
+}
+
+.featured-excerpt {
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    border: none;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+
+/* ── WEEKLY ARTICLES ── */
+.weekly-section {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 40px 48px;
+}
+
+.weekly-title {
+    font-family: "Aoboshi One", serif;
+    font-size: 26px;
+    color: var(--black);
+    margin-bottom: 24px;
+}
+
+.weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.card-title {
+    font-family: "Aoboshi One", serif;
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 8px;
+}
+
+.card-excerpt {
+    font-family: "Annapurna SIL", serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--black);
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-discover {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-family: "Annapurna SIL", serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    margin-left: auto;
+}
+
+/* ── ALL ARTICLES BUTTON ── */
+.all-articles-wrap {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 16px;
+}
+
+.btn-all-articles {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--black);
+    padding: 10px 28px;
+    border-radius: 999px;
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    color: var(--black);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* ── FOOTER ── */
+footer {
+    background: var(--black);
+    padding: 36px 40px 24px;
+}
+
+.footer-logo {
+    font-family: "Aoboshi One", serif;
+    font-size: 28px;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.footer-logo span {
+    color: var(--accent);
+}
+
+.footer-desc {
+    font-family: "Annapurna SIL", serif;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+    border-top: 1px solid #333;
+    padding-top: 16px;
+}
+
+.footer-links a {
+    font-family: "Annapurna SIL", serif;
+    font-size: 12px;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+/* ── GALERIE ── */
+.gallery-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 4px 0;
+}
+
+.galerie-page {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 32px 40px 48px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.gallery-card-title {
+    font-family: "Aoboshi One", serif;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: var(--black);
+}
+
+.gallery-card-excerpt {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.no-results {
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    color: var(--text-muted);
+    padding: 16px 0 24px;
+    text-align: center;
+}
+
+/* ── ARTICLE PAGE ── */
+.article-page {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 40px 40px 60px;
+}
+
+.article-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 48px;
+}
+
+.article-hero-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--gray);
+    overflow: hidden;
+}
+
+.article-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article-main-title {
+    font-family: "Aoboshi One", serif;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+.article-excerpt {
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--black);
+}
+
+.article-body {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.article-paragraph {
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    line-height: 32px;
+    color: var(--black);
+    margin-bottom: 24px;
+}
+
+.article-quote {
+    font-family: "Aoboshi One", serif;
+    font-size: 20px;
+    line-height: 32px;
+    color: var(--black);
+    text-align: center;
+    margin: 40px auto;
+    max-width: 520px;
+    position: relative;
+    padding: 0 32px;
+}
+
+.quote-mark {
+    font-family: Georgia, serif;
+    font-size: 64px;
+    color: var(--black);
+    line-height: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+.quote-mark.open {
+    margin-right: 6px;
+    top: 20px;
+}
+
+.quote-mark.close {
+    margin-left: 6px;
+    top: 30px;
+}
+
+.article-figure {
+    margin: 32px 0;
+}
+
+.article-single-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.article-figure figcaption,
+.gallery-figure figcaption {
+    font-family: "Annapurna SIL", serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.article-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.gallery-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+}
+
+.article-image-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin: 40px 0;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.article-image-text.image-right {
+    direction: rtl;
+}
+
+.article-image-text.image-right > * {
+    direction: ltr;
+}
+
+.it-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+}
+
+.article-image-text figure img,
+.article-image-text figure .it-img {
+    width: 100%;
+}
+
+.article-image-text p {
+    font-family: "Annapurna SIL", serif;
+    font-size: 15px;
+    line-height: 32px;
+    color: var(--black);
+}
+
+.article-author {
+    font-family: "Annapurna SIL", serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray);
+}
