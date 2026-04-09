@@ -37,6 +37,7 @@ const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
         </header>
 
         <div class="galerie-page">
+            <h2 class="title">Nos articles</h2>
             <nav class="tags">
                 {
                     categories.map((cat) => (
@@ -72,14 +73,14 @@ const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
                                         {article.date}
                                     </span>
                                 </div>
-                                <h3 class="gallery-card-title">
-                                    {article.title}
-                                </h3>
+                                <a href={`/article/${article.id}`} class="card-title link-title">
+                                    <h3>{article.title}</h3>
+                                </a>
                                 <p class="gallery-card-excerpt">
                                     {article.excerpt}
                                 </p>
                                 <div style="display:flex; justify-content:flex-end;">
-                                    <a href={`/article/${article.id}`} class="btn-discover">En découvrir plus →</a>
+                                    <a href={`/article/${article.id}`} class="btn-discover" title="Lire l'article complet">En découvrir plus →</a>
                                 </div>
                             </div>
                         </div>

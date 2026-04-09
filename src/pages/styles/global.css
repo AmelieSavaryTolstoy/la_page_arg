@@ -126,6 +126,19 @@ header {
     color: var(--black);
 }
 
+.link-title {
+    color: black;
+    text-decoration: underline;
+}
+
+.link-title h3:hover {
+    color: var(--accent)
+}
+
+.link-title h2:hover {
+    color: var(--accent)
+}
+
 /* ── TAGS ── */
 .tags {
     display: flex;
@@ -233,7 +246,7 @@ header {
     padding: 0 40px 48px;
 }
 
-.weekly-title {
+.title {
     font-family: "Aoboshi One", serif;
     font-size: 26px;
     color: var(--black);
@@ -574,3 +587,4 @@ footer {
     padding-top: 24px;
     border-top: 1px solid var(--gray);
 }
+
