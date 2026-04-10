@@ -337,14 +337,6 @@ footer {
     color: var(--accent);
 }
 
-.footer-desc {
-    font-family: "Annapurna SIL", serif;
-    font-size: 13px;
-    color: var(--white);
-    margin-bottom: 40px;
-    line-height: 1.5;
-}
-
 .footer-links {
     display: flex;
     gap: 24px;
