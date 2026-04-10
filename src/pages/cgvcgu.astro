@@ -1,0 +1,70 @@
+---
+import "./styles/global.css";
+
+const now = new Date();
+const formattedDate = now.toLocaleDateString("fr-FR", {
+	weekday: "long",
+	day: "numeric",
+	month: "long",
+});
+
+const dateLabel =
+	formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Annapurna+SIL:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>La Page</title>
+	</head>
+	<body>
+		<!-- Header -->
+		<header>
+			<h1 class="logo">LA P<span>A</span>GE</h1>
+			<p class="date">{dateLabel}</p>
+			<div class="yellow-bar"></div>
+			<nav class="arianne">
+				<a href="/">Accueil</a>
+			</nav>
+		</header>
+
+        <!-- Main content -->
+        <main class="cgvcgu-page">
+            <h2 class="title">Politique de confidentialité</h2>
+            <p>
+                Ce site fait partie d’un pojet étudiant réalisé par le BUT Métiers du Multimédia et de l’Internet de l’IUT Bordeaux Montaigne dans le cadre du projet Workshop 2026. L’objectif de ce projet est de faire de la prévention concernant le sectarisme en mettant en avant les comprtements qu’entrer dans une secte provoquent et les différents méchanismes que les sectes exploitent.
+            </p>
+            <p>
+                Le projet étant sous forme d’ARG (Alternate Reality Game), il s’inscrit dans la réalité mais n’est PAS RÉEL.
+                Tout éléments correspondants à la vie réelle est une coïncidence (les personnes mentionnées ainsi que leurs apparences, le choix des lieux, etc).
+            </p>
+            <p>
+                Nous souhaitions montrer que tout le monde peut être touché d’où le fait que le scénario traite d’un étudiant arrivant dans une nouvelle ville et que le point de vue soit extérieur pour mettre en avant la manière dont une secte modifie le comportement d’un proche.
+            </p>
+            <p>
+                Nous remercions Michel Jamet et Simon Saintarailles pour avoir accepter d’être acteurs dans notre histoire et espérons que notre énigme vous a plus.
+            </p>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+			<p class="footer-logo">LA P<span>A</span>GE</p>
+			<p class="footer-desc">
+				Worem ipsum dolor sit amet, consectetur elit.<br />
+				Nunc vulputate libero et velit interdum.
+			</p>
+			<div class="footer-links">
+				<a href="/cgvcgu">Politique de confidentialité</a>
+			</div>
+		</footer>
+    </body>
+</html>

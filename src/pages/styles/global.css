@@ -588,3 +588,9 @@ footer {
     border-top: 1px solid var(--gray);
 }
 
+/* ── CGVCGU page ── */
+.cgvcgu-page {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 40px 40px 60px;
+}
