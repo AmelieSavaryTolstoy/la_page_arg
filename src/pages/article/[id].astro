@@ -1,6 +1,7 @@
 ---
 import { articles } from '../data/articles';
 import type { ContentBlock } from '../data/articles';
+import { marked } from 'marked';
 
 export function getStaticPaths() {
     return articles.map((a) => ({ params: { id: String(a.id) } }));
@@ -39,7 +40,6 @@ const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
                 </a>
                 <p class="date">{dateLabel}</p>
                 <div class="yellow-bar"></div>
-                <!-- Fil d'arianne -->
                 <nav class="arianne">
                     <a href="/">Accueil</a>
                     <span class="arrianne-sep">/</span>
@@ -72,7 +72,8 @@ const dateLabel = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
                     {article.content.map((block: ContentBlock) => {
 
                         if (block.type === 'paragraph') {
-                            return <p class="article-paragraph">{block.content}</p>;
+                            const htmlContent = marked.parse(block.content);
+                            return <div set:html={htmlContent} />;
                         }
 
                         if (block.type === 'quote') {
